@@ -1,4 +1,4 @@
-import { room, setRoom } from "@/stores/roomStore";
+import { room, setRoom, setSign } from "@/stores/roomStore";
 import type { Room } from "@/types/types";
 import { useRouter } from "vue-router";
 
@@ -27,7 +27,6 @@ export function listenForRoomEvents(socket: any) {
   socket.on("roomLeft", (r: { room: Room }) => {
     console.log("Left room:", r.room);
     setRoom(r.room);
-    console.log(room)
     navigateToGameIfReady(r.room)
 
 
@@ -49,6 +48,11 @@ export function listenForRoomEvents(socket: any) {
 
 
   });
+
+  socket.on('roomReady',(r:{room:Room,sign:'X'|'O'})=>{
+    setRoom(r.room);
+    setSign(r.sign);
+  })
 
   socket.on('error', (err: string) => {
     console.warn(err)

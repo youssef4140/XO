@@ -5,14 +5,26 @@ const room = reactive<Room>({
   id: '',
   playerCount: 0,
   ready: false,
-  players: {}
+  players: {},
+  game:null
 })
+
+const sign = ref<'X' | 'O' | null>(null);
 
 function setRoom(r: Room) {
   room.id = r.id;
   room.playerCount = r.playerCount;
   room.ready = r.ready;
   room.players = r.players;
+  room.game = r.game;
+
+
 }
 
-export { room, setRoom }
+function setSign(l: 'X' | 'O') {
+  sign.value = l
+}
+
+
+
+export { room,sign, setRoom, setSign }

@@ -3,6 +3,6 @@ export type Room = {
     ready:boolean;
     playerCount: number;
     id:string;
-    // game?: GameManager;
+    game?: any;
 
 }
