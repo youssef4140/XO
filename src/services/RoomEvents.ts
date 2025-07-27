@@ -1,7 +1,7 @@
-import { room, setRoom, setSign } from "@/stores/roomStore";
-import type { Room } from "@/types/types";
+import { room, setGame, setRoom, setSign } from "@/stores/roomStore";
+import type { Game, Room } from "@/types/types";
 import { useRouter } from "vue-router";
-
+import { winner } from "@/views/GameBoard.vue"
 export function listenForRoomEvents(socket: any) {
 
   const router = useRouter();
@@ -49,12 +49,31 @@ export function listenForRoomEvents(socket: any) {
 
   });
 
-  socket.on('roomReady',(r:{room:Room,sign:'X'|'O'})=>{
+  socket.on('roomReady', (r: { room: Room, sign: 'X' | 'O' }) => {
     setRoom(r.room);
     setSign(r.sign);
   })
 
   socket.on('error', (err: string) => {
     console.warn(err)
+  })
+
+  socket.on('tik', (g: { game: Game }) => {
+    setGame(g.game);
+  })
+
+
+  socket.on('winner', (w: 'X' | 'O') => {
+    winner.value?.setWinner(w);
+  });
+
+  socket.on('newGame', (g: { game: Game, sign: 'X' | 'O' }) => {
+    setGame(g.game);
+    setSign(g.sign);
+
+    winner.value?.setWinner(null);
+    console.log(g.game, ' from room events')
+
+
   })
 }

@@ -1,4 +1,4 @@
-import type { Room } from "@/types/types";
+import type { Game, Room } from "@/types/types";
 import { reactive, ref } from "vue";
 
 const room = reactive<Room>({
@@ -24,7 +24,11 @@ function setRoom(r: Room) {
 function setSign(l: 'X' | 'O') {
   sign.value = l
 }
+function setGame(game:Game)
+{
+  room.game = game;
+}
 
 
 
-export { room,sign, setRoom, setSign }
+export { room,sign, setRoom, setSign,setGame }
