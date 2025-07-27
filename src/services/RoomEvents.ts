@@ -33,18 +33,14 @@ export function listenForRoomEvents(socket: any) {
   });
 
   socket.on("roomUpdated", (r: { room: Room }) => {
-    console.log("Room updated:", r.room);
     setRoom(r.room);
-    console.log(room)
     navigateToGameIfReady(r.room)
 
   });
 
   socket.on("playerLeft", (r: { room: Room }) => {
-    console.log("Room updated:", r.room);
     setRoom(r.room);
-    console.log(room)
-    navigateToGameIfReady(r.room)
+    router.push('/')
 
 
   });
