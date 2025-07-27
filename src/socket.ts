@@ -6,7 +6,9 @@ const state = reactive({
 
 });
 
-const URL = "http://localhost:3000";
+// const URL = "http://localhost:3000";
+const URL = import.meta.env.BASE_URL;
+// const URL = "https://tictactwo.onrender.com/"
 
 export const socket = io(URL);
 

@@ -98,5 +98,9 @@ export const winner: Ref<InstanceType<typeof Modal> | null> = ref(null);
     flex-direction: column;
     color: white;
     user-select: none;
+    max-height: 100svh;
+    overflow: hidden;
+
+
 }
 </style>

@@ -111,5 +111,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     color: white;
+    max-height: 100svh;
+    overflow: hidden;
 }
 </style>
